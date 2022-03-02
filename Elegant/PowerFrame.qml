@@ -17,7 +17,7 @@ Item {
 
         Item {
             width: 100
-            height: 150
+            height: 130
 
             ImgButton {
                 id: shutdownButton
@@ -47,7 +47,7 @@ Item {
 
         Item {
             width: 100
-            height: 150
+            height: 130
 
             ImgButton {
                 id: restartButton
@@ -77,7 +77,7 @@ Item {
 
         Item {
             width: 100
-            height: 150
+            height: 130
 
             ImgButton {
                 id: suspendButton

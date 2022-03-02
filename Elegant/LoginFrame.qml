@@ -17,14 +17,12 @@ Item {
             Qt.quit()
         }
         onLoginFailed: {
-            passwdInput.echoMode = TextInput.Normal
-            passwdInput.text = textConstants.loginFailed
-            passwdInput.focus = false
-            passwdInput.color = "#e7b222"
             glowAnimation.running = false
+            wrongPasswdAnimation.running = true
+            passwdInput.focus = true            
         }
     }
-
+     
     Item {
         id: loginItem
         anchors.centerIn: parent
@@ -64,18 +62,19 @@ Item {
                 PropertyAnimation { to: 0 ; duration: 1000}
             }
         }
-
+        
         Text {
             id: userNameText
+            visible: false
             anchors {
                 top: userIconRec.bottom
                 topMargin: 10
-                horizontalCenter: parent.horizontalCenter
             }
+            anchors.horizontalCenter: parent.horizontalCenter
 
             text: userName
             color: textColor
-            font.pointSize: 15
+            font.pointSize: 1
         }
 
         Rectangle {
@@ -83,15 +82,14 @@ Item {
             visible: ! isProcessing
             anchors {
                 top: userNameText.bottom
-                topMargin: 10
-                horizontalCenter: parent.horizontalCenter
+                topMargin: 7
             }
+           
             width: 260
             height: 35
             radius: 3
             color: "#55000000"
-            
-
+            x: parent.width / 2 - width/2
             TextInput {
                 id: passwdInput
                 anchors.fill: parent
@@ -100,11 +98,12 @@ Item {
                 clip: true
                 focus: true
                 color: textColor
-                font.pointSize: 10
+                font.pointSize: 5
                 selectByMouse: true
-                selectionColor: "#a8d6ec"
+                selectionColor: "#55ababab"
                 echoMode: TextInput.Password
                 verticalAlignment: TextInput.AlignVCenter
+                
                 onFocusChanged: {
                     if (focus) {
                         color = textColor
@@ -116,6 +115,8 @@ Item {
                     glowAnimation.running = true
                     sddm.login(userNameText.text, passwdInput.text, sessionIndex)
                 }
+               
+
                 KeyNavigation.backtab: {
                     if (sessionButton.visible) {
                         return sessionButton
@@ -154,5 +155,30 @@ Item {
                 KeyNavigation.backtab: passwdInput
             }
         }
+
+        SequentialAnimation {
+            id: wrongPasswdAnimation
+            running: false
+            loops: 1
+            alwaysRunToEnd: true
+            PropertyAction { target: passwdInput; property: "echoMode"; value: TextInput.Normal }
+            PropertyAction { target: passwdInput; property: "text"; value: textConstants.loginFailed }
+            PropertyAction { target: passwdInput; property: "focus"; value: false }
+            PropertyAction { target: passwdInput; property: "color"; value: "#dd3d38" }
+            PropertyAction { target: passwdInputRec; property: "border.color"; value: "#50dd3d38" }
+            PathAnimation {
+                target: passwdInputRec
+                duration: 400
+                path: Path {
+                        PathLine {x:parent.width / 2 - passwdInputRec.width/2 + 4}
+                        PathLine {x:parent.width / 2 - passwdInputRec.width/2 - 8}
+                        PathLine {x:parent.width / 2 - passwdInputRec.width/2 + 12}
+                        PathLine {x:parent.width / 2 - passwdInputRec.width/2 - 16}
+                        PathLine {x:parent.width / 2 - passwdInputRec.width/2}
+                    }
+                }
+            PropertyAction { target: passwdInputRec; property: "border.color"; value: "#55000000" }
+
+            }
+        }
     }
-}

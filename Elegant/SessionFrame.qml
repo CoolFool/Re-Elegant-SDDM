@@ -57,9 +57,10 @@ Item {
 
     ListView {
         id: sessionList
-        anchors.centerIn: parent
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: parent.bottom
         width:  childrenRect.width > m_viewMaxWidth ? m_viewMaxWidth : childrenRect.width
-        height: 150
+        height: 130
         clip: true
         model: sessionModel
         currentIndex: sessionModel.lastIndex
@@ -75,7 +76,7 @@ Item {
             color: activeBG || focus ? "#55000000" : "transparent"
 
             width: 230
-            height: 150
+            height: 130
 
             ImgButton {
                 id: iconButton
