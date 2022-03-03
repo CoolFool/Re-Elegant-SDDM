@@ -58,8 +58,8 @@ Item {
                 running: false
                 alwaysRunToEnd: true
                 loops: Animation.Infinite
-                PropertyAnimation { to: 20 ; duration: 1000}
-                PropertyAnimation { to: 0 ; duration: 1000}
+                PropertyAnimation { to: 20 ; duration: 500}
+                PropertyAnimation { to: 0 ; duration: 500}
             }
         }
         
@@ -178,7 +178,6 @@ Item {
                     }
                 }
             PropertyAction { target: passwdInputRec; property: "border.color"; value: "#55000000" }
-
             }
         }
     }

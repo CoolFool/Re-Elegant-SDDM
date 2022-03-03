@@ -4,18 +4,20 @@ Canvas {
     id: avatar
     property string source: ""
     property color m_strokeStyle: "#ffffff"
-
+    antialiasing: true
+    smooth:true
     signal clicked()
-
     onSourceChanged: delayPaintTimer.running = true
     onPaint: {
         var ctx = getContext("2d");
+        ctx.reset();
         ctx.beginPath()
         ctx.ellipse(0, 0, width, height)
+       
         ctx.clip()
         ctx.drawImage(source, 0, 0, width, height)
         ctx.strokeStyle = avatar.m_strokeStyle
-        ctx.lineWidth = 6
+        ctx.lineWidth = 5
         ctx.stroke()
     }
 
