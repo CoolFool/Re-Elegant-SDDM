@@ -168,12 +168,14 @@ Item {
             PropertyAction { target: passwdInputRec; property: "border.color"; value: "#50dd3d38" }
             PathAnimation {
                 target: passwdInputRec
-                duration: 400
+                duration: 600
                 path: Path {
                         PathLine {x:parent.width / 2 - passwdInputRec.width/2 + 4}
                         PathLine {x:parent.width / 2 - passwdInputRec.width/2 - 8}
                         PathLine {x:parent.width / 2 - passwdInputRec.width/2 + 12}
                         PathLine {x:parent.width / 2 - passwdInputRec.width/2 - 16}
+                        PathLine {x:parent.width / 2 - passwdInputRec.width/2 + 20}
+                        PathLine {x:parent.width / 2 - passwdInputRec.width/2 - 24}
                         PathLine {x:parent.width / 2 - passwdInputRec.width/2}
                     }
                 }
